@@ -6,11 +6,21 @@ function M.get_current_file_paths()
 		return {}
 	end
 
+	local line_info = "#L" .. vim.fn.line(".")
+
+	local relative_path = vim.fn.fnamemodify(current_file, ":.")
+	local relative_path_with_line = relative_path .. line_info
+	local home_relative_path = vim.fn.fnamemodify(current_file, ":~")
+	local home_relative_path_with_line = home_relative_path .. line_info
+
 	return {
-		{ display = "Relative Path", path = vim.fn.fnamemodify(current_file, ":.") },
-		{ display = "Absolute Path", path = vim.fn.fnamemodify(current_file, ":p") },
-		{ display = "Filename Only", path = vim.fn.fnamemodify(current_file, ":t") },
-		{ display = "Directory", path = vim.fn.fnamemodify(current_file, ":h") },
+		{ display = "relative path", path = relative_path },
+		{ display = "relative path with line", path = relative_path_with_line },
+		{ display = "home-relative path", path = home_relative_path },
+		{ display = "home-relative path with line", path = home_relative_path_with_line },
+		{ display = "absolute path", path = vim.fn.fnamemodify(current_file, ":p") },
+		{ display = "filename only", path = vim.fn.fnamemodify(current_file, ":t") },
+		{ display = "current directory", path = vim.fn.fnamemodify(current_file, ":h") },
 	}
 end
 
