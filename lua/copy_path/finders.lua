@@ -3,8 +3,8 @@ local utilities = require("copy_path.utilities")
 
 local M = {}
 
-function M.create_path_finder()
-	local paths = utilities.get_current_file_paths()
+function M.create_path_finder(mode)
+	local paths = utilities.get_current_file_paths(mode)
 
 	return finders.new_table({
 		results = paths,
